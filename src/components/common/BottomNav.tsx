@@ -1,8 +1,8 @@
 'use client';
 
+import { Home, MessageCircle, User } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Home, MessageCircle, User } from 'lucide-react';
 
 const navItems = [
   {
@@ -22,7 +22,7 @@ const navItems = [
   },
 ];
 
-export default function BottomNav() {
+export const BottomNav = () => {
   const pathname = usePathname();
 
   return (
@@ -41,4 +41,4 @@ export default function BottomNav() {
       ))}
     </div>
   );
-}
+};

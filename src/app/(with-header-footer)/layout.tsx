@@ -1,5 +1,6 @@
 import { Noto_Sans_KR } from 'next/font/google';
-import './globals.css';
+import { Header } from '@/components/common/Header';
+import { Footer } from '@/components/common/Footer';
 
 export const NOTO_SANS_KR = Noto_Sans_KR({
   subsets: ['latin'],
@@ -13,10 +14,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang='ko'>
-      <body className='min-h-screen flex flex-col'>
-        <main className='flex-1 pb-16'>{children}</main>
-      </body>
-    </html>
+    <>
+      <Header />
+      {children}
+      <Footer />
+    </>
   );
 }
