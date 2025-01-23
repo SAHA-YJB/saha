@@ -6,7 +6,7 @@ export default function LoginPage() {
       <div className='w-full max-w-sm space-y-6'>
         <div className='text-center'>
           <h1 className='text-2xl font-bold text-white'>로그인</h1>
-          <p className='text-gray-400 mt-2'>당근마켓에 오신 것을 환영합니다!</p>
+          <p className='text-gray-400 mt-2'>SAHA마켓에 오신 것을 환영합니다!</p>
         </div>
 
         <form className='space-y-4'>
