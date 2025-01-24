@@ -1,6 +1,6 @@
-import { products } from '@/data/products';
+import { products } from '@/mock/products';
 import ProductItem from '@/components/ProductItem';
-import { Product } from '@/data/products';
+import { Product } from '@/mock/products';
 
 export default function Home() {
   return (

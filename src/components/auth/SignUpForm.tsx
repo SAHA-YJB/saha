@@ -6,6 +6,7 @@ import { z } from 'zod';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { createClient } from '@/utils/supabase/client';
+import { ButtonSpinner } from '../common/ButtonSpinner';
 
 const signUpSchema = z
   .object({
@@ -22,7 +23,6 @@ const signUpSchema = z
 type SignUpForm = z.infer<typeof signUpSchema>;
 
 export const SignUpForm = () => {
-  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string>('');
 
   const supabase = createClient();
@@ -32,7 +32,7 @@ export const SignUpForm = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     watch,
   } = useForm<SignUpForm>({
     resolver: zodResolver(signUpSchema),
@@ -46,9 +46,7 @@ export const SignUpForm = () => {
 
   const onSubmit = async (data: SignUpForm) => {
     try {
-      setIsLoading(true);
       setError('');
-
       const { error: signUpError } = await supabase.auth.signUp({
         email: data.email,
         password: data.password,
@@ -70,8 +68,6 @@ export const SignUpForm = () => {
             : err.message
           : '회원가입 중 오류가 발생했습니다'
       );
-    } finally {
-      setIsLoading(false);
     }
   };
 
@@ -127,9 +123,9 @@ export const SignUpForm = () => {
       <button
         type='submit'
         className='btn btn-primary w-full'
-        disabled={isLoading}
+        disabled={isSubmitting}
       >
-        {isLoading ? '처리중...' : '회원가입'}
+        {isSubmitting ? <ButtonSpinner /> : '회원가입'}
       </button>
     </form>
   );

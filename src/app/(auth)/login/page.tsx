@@ -1,3 +1,4 @@
+import { LoginForm } from '@/components/auth/LoginForm';
 import Link from 'next/link';
 
 export default function LoginPage() {
@@ -9,23 +10,7 @@ export default function LoginPage() {
           <p className='text-gray-400 mt-2'>SAHA마켓에 오신 것을 환영합니다!</p>
         </div>
 
-        <form className='space-y-4'>
-          <div className='space-y-2'>
-            <input
-              type='email'
-              placeholder='이메일'
-              className='input input-bordered w-full bg-transparent text-white'
-            />
-          </div>
-          <div className='space-y-2'>
-            <input
-              type='password'
-              placeholder='비밀번호'
-              className='input input-bordered w-full bg-transparent text-white'
-            />
-          </div>
-          <button className='btn btn-primary w-full'>로그인</button>
-        </form>
+        <LoginForm />
 
         <div className='text-center text-gray-400'>
           <span>계정이 없으신가요? </span>
