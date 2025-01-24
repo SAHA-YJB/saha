@@ -1,12 +1,25 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { Product } from '@/mock/products';
+import { Product } from '@/types/product';
+import { formatDistanceToNow, differenceInSeconds } from 'date-fns';
+import { ko } from 'date-fns/locale';
 
 interface ProductItemProps {
   product: Product;
 }
 
-export default function ProductItem({ product }: ProductItemProps) {
+export const ProductItem = ({ product }: ProductItemProps) => {
+  const getTimeAgo = (date: string) => {
+    const seconds = differenceInSeconds(new Date(), new Date(date));
+    if (seconds < 60) {
+      return '1분 미만';
+    }
+    return formatDistanceToNow(new Date(date), {
+      addSuffix: true,
+      locale: ko,
+    });
+  };
+
   return (
     <Link
       href={`/products/${product.id}`}
@@ -14,7 +27,7 @@ export default function ProductItem({ product }: ProductItemProps) {
     >
       <div className='relative h-24 w-24 flex-shrink-0 overflow-hidden rounded-md'>
         <Image
-          src={product.image}
+          src={product.images[0]}
           alt={product.title}
           fill
           sizes='(max-width: 768px) 100vw, 50vw'
@@ -24,10 +37,10 @@ export default function ProductItem({ product }: ProductItemProps) {
       </div>
 
       <div className='flex flex-1 flex-col justify-between'>
-        <div>
-          <h3 className='mb-1 text-sm text-white'>{product.title}</h3>
-          <p className='text-xs text-gray-400'>
-            {product.location} · {product.time}
+        <div className='max-w-[200px]'>
+          <h3 className='mb-1 truncate text-sm text-white'>{product.title}</h3>
+          <p className='truncate text-xs text-gray-400'>
+            {product.location} · {getTimeAgo(product.created_at)}
           </p>
         </div>
         <div>
@@ -42,4 +55,4 @@ export default function ProductItem({ product }: ProductItemProps) {
       </div>
     </Link>
   );
-}
+};

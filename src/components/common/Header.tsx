@@ -1,16 +1,6 @@
 import Link from 'next/link';
 import { Bell, Search } from 'lucide-react';
-
-const SAHA_DONGS = [
-  '감천동',
-  '괴정동',
-  '당리동',
-  '신평동',
-  '장림동',
-  '다대동',
-  '구평동',
-  '하단동',
-];
+import { SAHA_DONGS } from '@/constants/location';
 
 export const Header = () => {
   const notificationCount = 3; // 알림 개수

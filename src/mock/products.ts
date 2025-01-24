@@ -5,8 +5,8 @@ export interface Product {
   time: string;
   price: number;
   image: string;
-  comments: number;
-  likes: number;
+  comments?: number;
+  likes?: number;
 }
 
 export const products: Product[] = [
