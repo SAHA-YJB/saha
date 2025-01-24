@@ -12,7 +12,7 @@ export function ProductList() {
   const { ref, inView } = useInView();
 
   const {
-    data,
+    data: productsData,
     error,
     fetchNextPage,
     hasNextPage,
@@ -21,8 +21,8 @@ export function ProductList() {
   } = useInfiniteQuery({
     queryKey: ['products'],
     queryFn: getProducts,
-    getNextPageParam: (lastPage) => lastPage.nextPage,
     initialPageParam: 0,
+    getNextPageParam: (lastPage) => lastPage.nextPage,
   });
 
   useEffect(() => {
@@ -46,14 +46,14 @@ export function ProductList() {
   return (
     <>
       <div className='flex flex-col'>
-        {data?.pages.map((page) =>
+        {productsData?.pages.map((page) =>
           page.products.map((product) => (
             <ProductItem key={product.id} product={product} />
           ))
         )}
       </div>
 
-      <div ref={ref} className='h-10 w-full'>
+      <div ref={ref} className='mb-10 h-10 w-full'>
         {isFetchingNextPage && (
           <div className='flex justify-center p-4'>
             <ButtonSpinner />
