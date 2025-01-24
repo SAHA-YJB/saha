@@ -1,25 +1,13 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { Product } from '@/types/product';
-import { formatDistanceToNow, differenceInSeconds } from 'date-fns';
-import { ko } from 'date-fns/locale';
+import { TimeAgo } from './TimeAgo';
 
 interface ProductItemProps {
   product: Product;
 }
 
-export const ProductItem = ({ product }: ProductItemProps) => {
-  const getTimeAgo = (date: string) => {
-    const seconds = differenceInSeconds(new Date(), new Date(date));
-    if (seconds < 60) {
-      return '1분 미만';
-    }
-    return formatDistanceToNow(new Date(date), {
-      addSuffix: true,
-      locale: ko,
-    });
-  };
-
+export function ProductItem({ product }: ProductItemProps) {
   return (
     <Link
       href={`/products/${product.id}`}
@@ -40,7 +28,7 @@ export const ProductItem = ({ product }: ProductItemProps) => {
         <div className='max-w-[200px]'>
           <h3 className='mb-1 truncate text-sm text-white'>{product.title}</h3>
           <p className='truncate text-xs text-gray-400'>
-            {product.location} · {getTimeAgo(product.created_at)}
+            {product.location} · <TimeAgo date={product.created_at} />
           </p>
         </div>
         <div>
@@ -55,4 +43,4 @@ export const ProductItem = ({ product }: ProductItemProps) => {
       </div>
     </Link>
   );
-};
+}

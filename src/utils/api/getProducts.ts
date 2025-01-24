@@ -1,14 +1,24 @@
 import { createClient } from '@/utils/supabase/client';
-import { Product } from '@/types/product';
 
 const supabase = createClient();
 
-export const getProducts = async (): Promise<Product[]> => {
-  const { data, error } = await supabase
-    .from('products')
-    .select('*')
-    .order('created_at', { ascending: false });
+const PAGE_SIZE = 10;
 
-  if (error) console.error(error);
-  return data || [];
+export const getProducts = async ({ pageParam = 0 }) => {
+  const from = pageParam * PAGE_SIZE;
+  const to = from + PAGE_SIZE - 1;
+
+  const { data, error, count } = await supabase
+    .from('products')
+    .select('*', { count: 'exact' })
+    .order('created_at', { ascending: false })
+    .range(from, to);
+
+  if (error) throw error;
+
+  return {
+    products: data || [],
+    nextPage: data?.length === PAGE_SIZE ? pageParam + 1 : undefined,
+    totalCount: count || 0,
+  };
 };
