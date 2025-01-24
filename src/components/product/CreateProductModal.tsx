@@ -11,6 +11,7 @@ import { createClient } from '@/utils/supabase/client';
 import { useRouter } from 'next/navigation';
 import { useQueryClient } from '@tanstack/react-query';
 import { SAHA_DONGS } from '@/constants/location';
+import { LocationSelect } from '@/components/common/LocationSelect';
 
 const productSchema = z.object({
   title: z.string().min(2, '제목은 2글자 이상이어야 합니다'),
@@ -242,20 +243,12 @@ export const CreateProductModal = ({ isOpen, onClose }: Props) => {
             </div>
 
             <div>
-              <select
-                {...register('location')}
-                className='select select-bordered select-primary w-full'
+              <LocationSelect
+                variant='bordered'
+                size='md'
+                registration={register('location')}
                 defaultValue=''
-              >
-                <option disabled value=''>
-                  거래 희망 장소
-                </option>
-                {SAHA_DONGS.map((dong) => (
-                  <option key={dong} value={dong}>
-                    {dong}
-                  </option>
-                ))}
-              </select>
+              />
               {errors.location && (
                 <p className='mt-1 text-sm text-red-500'>
                   {errors.location.message}

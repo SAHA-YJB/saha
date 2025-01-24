@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { Bell, Search } from 'lucide-react';
-import { SAHA_DONGS } from '@/constants/location';
+import { LocationSelect } from './LocationSelect';
 
 export const Header = () => {
   const notificationCount = 3; // 알림 개수
@@ -8,13 +8,7 @@ export const Header = () => {
   return (
     <div className='navbar sticky top-0 z-50 bg-black px-4'>
       <div className='flex-1'>
-        <select className='select select-ghost select-sm text-white'>
-          {SAHA_DONGS.map((dong) => (
-            <option key={dong} className='bg-black'>
-              {dong}
-            </option>
-          ))}
-        </select>
+        <LocationSelect />
       </div>
 
       <div className='flex-none'>
