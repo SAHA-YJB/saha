@@ -1,11 +1,11 @@
 'use client';
 
+import { createClient } from '@/utils/supabase/client';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { createClient } from '@/utils/supabase/client';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
 import { ButtonSpinner } from '../common/ButtonSpinner';
 
 const signUpSchema = z
@@ -81,7 +81,7 @@ export const SignUpForm = () => {
           className='input input-bordered w-full bg-transparent text-white'
         />
         {emailValue?.length > 0 && errors.email && (
-          <p className='text-red-500 text-sm'>{errors.email.message}</p>
+          <p className='text-sm text-red-500'>{errors.email.message}</p>
         )}
       </div>
       <div className='space-y-2'>
@@ -92,7 +92,7 @@ export const SignUpForm = () => {
           className='input input-bordered w-full bg-transparent text-white'
         />
         {nicknameValue?.length > 0 && errors.nickname && (
-          <p className='text-red-500 text-sm'>{errors.nickname.message}</p>
+          <p className='text-sm text-red-500'>{errors.nickname.message}</p>
         )}
       </div>
       <div className='space-y-2'>
@@ -103,7 +103,7 @@ export const SignUpForm = () => {
           className='input input-bordered w-full bg-transparent text-white'
         />
         {passwordValue?.length > 0 && errors.password && (
-          <p className='text-red-500 text-sm'>{errors.password.message}</p>
+          <p className='text-sm text-red-500'>{errors.password.message}</p>
         )}
       </div>
       <div className='space-y-2'>
@@ -114,12 +114,12 @@ export const SignUpForm = () => {
           className='input input-bordered w-full bg-transparent text-white'
         />
         {confirmPasswordValue?.length > 0 && errors.confirmPassword && (
-          <p className='text-red-500 text-sm'>
+          <p className='text-sm text-red-500'>
             {errors.confirmPassword.message}
           </p>
         )}
       </div>
-      {error && <div className='text-red-500 text-sm'>{error}</div>}
+      {error && <div className='text-sm text-red-500'>{error}</div>}
       <button
         type='submit'
         className='btn btn-primary w-full'

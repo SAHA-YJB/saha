@@ -67,7 +67,7 @@ export const LoginForm = () => {
           className='input input-bordered w-full bg-transparent text-white'
         />
         {emailValue?.length > 0 && errors.email && (
-          <p className='text-red-500 text-sm'>{errors.email.message}</p>
+          <p className='text-sm text-red-500'>{errors.email.message}</p>
         )}
       </div>
       <div className='space-y-2'>
@@ -78,10 +78,10 @@ export const LoginForm = () => {
           className='input input-bordered w-full bg-transparent text-white'
         />
         {passwordValue?.length > 0 && errors.password && (
-          <p className='text-red-500 text-sm'>{errors.password.message}</p>
+          <p className='text-sm text-red-500'>{errors.password.message}</p>
         )}
       </div>
-      {error && <div className='text-red-500 text-sm'>{error}</div>}
+      {error && <div className='text-sm text-red-500'>{error}</div>}
       <button
         type='submit'
         className='btn btn-primary w-full'
