@@ -1,5 +1,5 @@
-import Link from 'next/link';
 import { Bell, Search } from 'lucide-react';
+import Link from 'next/link';
 import { LocationSelect } from './LocationSelect';
 
 export const Header = () => {
