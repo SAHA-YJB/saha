@@ -1,6 +1,9 @@
+'use client';
+import { Product } from '@/types/product';
+import { createClient } from '@/utils/supabase/client';
+import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Product } from '@/types/product';
 import { TimeAgo } from './TimeAgo';
 
 interface ProductItemProps {
@@ -8,6 +11,20 @@ interface ProductItemProps {
 }
 
 export function ProductItem({ product }: ProductItemProps) {
+  const supabase = createClient();
+
+  const { data: likesCount } = useQuery({
+    queryKey: ['likesCount', product.id],
+    queryFn: async () => {
+      const { count } = await supabase
+        .from('likes')
+        .select('*', { count: 'exact' })
+        .eq('product_id', product.id);
+
+      return count || 0;
+    },
+  });
+
   return (
     <Link
       href={`/products/${product.id}`}
@@ -38,7 +55,7 @@ export function ProductItem({ product }: ProductItemProps) {
         </div>
         <div className='flex gap-2 text-xs text-gray-400'>
           <span>댓글 {product.comments}</span>
-          <span>관심 {product.likes}</span>
+          <span>관심 {likesCount}</span>
         </div>
       </div>
     </Link>

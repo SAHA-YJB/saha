@@ -1,7 +1,7 @@
 'use client';
 
 import { getProducts } from '@/utils/api/getProducts';
-import { useInfiniteQuery } from '@tanstack/react-query';
+import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { ButtonSpinner } from '../common/ButtonSpinner';
@@ -49,7 +49,7 @@ export function ProductList() {
         {productsData?.pages.map((page) =>
           page.products.map((product) => (
             <ProductItem key={product.id} product={product} />
-          )),
+          ))
         )}
       </div>
 

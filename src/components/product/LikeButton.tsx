@@ -20,7 +20,7 @@ export function LikeButton({ productId, userId }: LikeButtonProps) {
         .select('*')
         .eq('product_id', productId)
         .eq('user_id', userId)
-        .single();
+        .maybeSingle();
 
       if (error) return false;
       return !!data;
@@ -63,13 +63,10 @@ export function LikeButton({ productId, userId }: LikeButtonProps) {
     },
   });
 
-  if (isLoading) return <span>Loading...</span>;
+  if (isLoading) return <span>...</span>;
 
   return (
-    <button
-      onClick={() => mutation.mutate()}
-      className='text-primary hover:underline'
-    >
+    <button onClick={() => mutation.mutate()} className='text-primary'>
       {liked ? '♥' : '♡'} 관심 {likesCount}
     </button>
   );
