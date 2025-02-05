@@ -2,6 +2,7 @@
 
 import { createClient } from '@/utils/supabase/client';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { ButtonSpinner } from '../common/ButtonSpinner';
 
 interface LikeButtonProps {
   productId: string;
@@ -63,7 +64,7 @@ export function LikeButton({ productId, userId }: LikeButtonProps) {
     },
   });
 
-  if (isLoading) return <span>...</span>;
+  if (isLoading) return <ButtonSpinner />;
 
   return (
     <button onClick={() => mutation.mutate()} className='text-primary'>
