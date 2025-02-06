@@ -8,5 +8,4 @@ export interface Product {
   user_id: string;
   created_at: string;
   comments?: number;
-  likes?: number;
 }

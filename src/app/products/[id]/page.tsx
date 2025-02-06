@@ -58,6 +58,7 @@ export default async function ProductDetailPage({
             {product.price.toLocaleString()}원
           </p>
           <div className='flex gap-4 text-sm text-gray-400'>
+            <span>조회 {}</span>
             <span>댓글 {product.comments || 0}</span>
             <LikeButton
               productId={product.id}
@@ -65,7 +66,7 @@ export default async function ProductDetailPage({
             />
           </div>
           <div className='mt-6'>
-            <Link href='/' className='text-primary hover:underline'>
+            <Link href='/' className='text-primary'>
               ← 목록으로 돌아가기
             </Link>
           </div>

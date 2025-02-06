@@ -54,6 +54,7 @@ export function ProductItem({ product }: ProductItemProps) {
           </p>
         </div>
         <div className='flex gap-2 text-xs text-gray-400'>
+          <span>조회 {}</span>
           <span>댓글 {product.comments}</span>
           <span>관심 {likesCount}</span>
         </div>
