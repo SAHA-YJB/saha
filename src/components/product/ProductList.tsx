@@ -1,7 +1,7 @@
 'use client';
 
 import { getProducts } from '@/utils/api/getProducts';
-import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
+import { useInfiniteQuery } from '@tanstack/react-query';
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { ButtonSpinner } from '../common/ButtonSpinner';
@@ -23,6 +23,8 @@ export function ProductList() {
     queryFn: getProducts,
     initialPageParam: 0,
     getNextPageParam: (lastPage) => lastPage.nextPage,
+    staleTime: 0,
+    refetchOnWindowFocus: true,
   });
 
   useEffect(() => {

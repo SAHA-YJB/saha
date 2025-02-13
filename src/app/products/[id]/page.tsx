@@ -1,6 +1,6 @@
 import { LikeButton } from '@/components/product/LikeButton';
 import { TimeAgo } from '@/components/product/TimeAgo';
-import { Product } from '@/types/product';
+import UpdateViewCounter from '@/components/product/UpdateViewCounter';
 import { createClient } from '@/utils/supabase/server';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -23,7 +23,7 @@ export default async function ProductDetailPage({
     return notFound(); // 유저 정보 오류 시 처리
   }
 
-  // 제품 정보 최초 조회
+  // 제품 정보 조회
   const { data: product, error } = await supabase
     .from('products')
     .select('*')
@@ -35,28 +35,8 @@ export default async function ProductDetailPage({
     return notFound();
   }
 
-  // 조회수 업데이트 (현재 제품 조회수에 +1)
-  await supabase
-    .from('products')
-    .update({ views: (product.views || 0) + 1 })
-    .eq('id', id);
-
-  // 업데이트된 정보를 새롭게 가져옴
-  const { data: updatedProduct, error: refetchError } = await supabase
-    .from('products')
-    .select('*')
-    .eq('id', id)
-    .single();
-
-  if (refetchError || !updatedProduct) {
-    console.error(
-      '업데이트된 상품 정보를 불러오는 도중 오류가 발생했습니다:',
-      refetchError
-    );
-    // 업데이트 실패 시 최초 데이터를 사용
-  }
-
-  const finalProduct: Product = updatedProduct || product;
+  // SSR 단계에서는 조회수 업데이트를 수행하지 않음
+  const finalProduct = product;
 
   return (
     <main className='min-h-screen bg-black p-4 text-white'>
@@ -81,7 +61,13 @@ export default async function ProductDetailPage({
             {finalProduct.price.toLocaleString()}원
           </p>
           <div className='flex gap-4 text-sm text-gray-400'>
-            <span>조회 {finalProduct.views || 0}</span>
+            <span>
+              조회{' '}
+              <UpdateViewCounter
+                productId={finalProduct.id}
+                initialViews={finalProduct.views || 0}
+              />
+            </span>
             <span>댓글 {finalProduct.comments || 0}</span>
             <LikeButton
               productId={finalProduct.id}

@@ -1,13 +1,13 @@
 'use client';
-import { Product } from '@/types/product';
 import { createClient } from '@/utils/supabase/client';
 import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
 import Link from 'next/link';
+import type { Database } from '../../../database.types';
 import { TimeAgo } from './TimeAgo';
 
 interface ProductItemProps {
-  product: Product;
+  product: Database['public']['Tables']['products']['Row'];
 }
 
 export function ProductItem({ product }: ProductItemProps) {

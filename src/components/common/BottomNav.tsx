@@ -26,7 +26,7 @@ export const BottomNav = () => {
   const pathname = usePathname();
 
   return (
-    <div className='btm-nav bg-base-100 border-t'>
+    <div className='btm-nav border-t bg-base-100'>
       {navItems.map((item) => (
         <Link
           key={item.path}
@@ -35,7 +35,7 @@ export const BottomNav = () => {
             pathname === item.path ? 'active text-primary' : 'text-neutral'
           }`}
         >
-          <item.icon className='w-5 h-5' />
+          <item.icon className='h-5 w-5' />
           <div className='btm-nav-label'>{item.label}</div>
         </Link>
       ))}
