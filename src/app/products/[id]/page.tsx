@@ -1,3 +1,4 @@
+import { CommentSection } from '@/components/product/CommentSection';
 import { LikeButton } from '@/components/product/LikeButton';
 import { TimeAgo } from '@/components/product/TimeAgo';
 import UpdateViewCounter from '@/components/product/UpdateViewCounter';
@@ -76,9 +77,10 @@ export default async function ProductDetailPage({
           </div>
           <div className='mt-6'>
             <Link href='/' className='text-primary'>
-              ← 목록으로 돌아가기
+              목록으로 돌아가기
             </Link>
           </div>
+          <CommentSection productId={finalProduct.id} />
         </div>
       </article>
     </main>
