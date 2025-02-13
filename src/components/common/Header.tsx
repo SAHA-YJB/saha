@@ -1,6 +1,7 @@
 import { Bell, Search } from 'lucide-react';
 import Link from 'next/link';
 import { LocationSelect } from './LocationSelect';
+import { NotificationBell } from './NotificationBell';
 
 export const Header = () => {
   const notificationCount = 3;
@@ -17,19 +18,7 @@ export const Header = () => {
             <Search className='h-5 w-5 text-white' />
           </Link>
         </div>
-        <div className='indicator'>
-          <Link
-            href='/notifications'
-            className='btn btn-circle btn-ghost relative'
-          >
-            <Bell className='h-5 w-5 text-white' />
-          </Link>
-          {notificationCount > 0 && (
-            <span className='badge indicator-item badge-primary badge-sm absolute right-3 top-2 size-5 text-white'>
-              {notificationCount}
-            </span>
-          )}
-        </div>
+        <NotificationBell />
       </div>
     </div>
   );
