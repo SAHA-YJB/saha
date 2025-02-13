@@ -12,7 +12,7 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   // URL 파라미터에서 상품 id 추출
-  const { id } = params;
+  const { id } = await params;
 
   // 요청마다 Supabase 클라이언트를 생성 (서버 사이드에서 실행)
   const supabase = await createClient();
@@ -103,7 +103,7 @@ export async function POST(
     // 댓글 작성자와 상품 소유자가 다를 경우에만 알림 생성
     if (userData.user.id !== product.user_id) {
       // 알림 메시지 구성: 댓글 작성자가 남긴 알림 메시지
-      const notificationMessage = `${userData.user.email} 님이 ${product.title} 상품에 댓글을 남겼습니다.`;
+      const notificationMessage = `${product.title} 상품에 댓글을 남겼습니다.`;
       // notifications 테이블에 알림 레코드 삽입 (product_id도 함께 저장)
       const { error: notifError } = await supabase
         .from('notifications')
